@@ -31,8 +31,11 @@ Next install the dependencies
 ```
     pip insatll requirement.txt
 ```
-Next run migration 
-```python manage.py migrate```
+Next run migrations
+
+```
+    python manage.py migrate
+```
 
 Running the app
 ```
