@@ -1,0 +1,42 @@
+{% extends 'app/base.html' %}
+
+{% block 'content' %}
+<div class="content">
+    <h1 class="title">Add a new user</h1>
+    <ul>
+        <li><a class="btn" href="{% url 'list_users' %}">List users</a></li>
+        <li><a class="btn" href="{% url 'add_user' %}">Add new user</a></li>
+    </ul>
+    <div class="form-container">
+
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="messages danger">
+                        {{ error|escape }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+        {% if messages %}
+            {% for message in messages %}
+            <div {% if message.tags %} class="messages {{ message.tags }}" {% endif %}>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <form action="{% url 'add_user' %}" method="post">
+            {% csrf_token %}
+            {% for input in form %}
+            <div class="form-group">
+                <label>{{ input.label }}</label>
+
+                {{ input }}
+            </div>
+
+            {% endfor %}
+            <input type="submit" class="btn" value="Submit">
+        </form>
+    </div>
+
+</div>
+{% endblock %}
